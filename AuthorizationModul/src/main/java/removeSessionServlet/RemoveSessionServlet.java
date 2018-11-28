@@ -1,24 +1,22 @@
-package authorizationServlet;
+package removeSessionServlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class AuthorizationServlet
+ * Servlet implementation class RemoveSessionServlet
  */
-public class AuthorizationServlet extends HttpServlet {
+public class RemoveSessionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AuthorizationServlet() {
+    public RemoveSessionServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,12 +25,9 @@ public class AuthorizationServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String name = request.getParameter("userName");
-		if(name.equals("user")) {
-			request.getRequestDispatcher("/user.jsp").forward(request, response);
-		} else if (name.equals("admin")) {
-			request.getRequestDispatcher("/admin.jsp").forward(request, response);
-		}
+		HttpSession session = request.getSession();
+		session.removeAttribute("name");
+		session.removeAttribute("password");
 		
 	}
 

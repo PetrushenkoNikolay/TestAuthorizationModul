@@ -11,6 +11,8 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.omg.CORBA.Request;
+
 /**
  * Servlet Filter implementation class AuthorizationFilter
  */
@@ -35,19 +37,20 @@ public class AuthorizationFilter implements Filter {
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest req = (HttpServletRequest)request;
+		String name = req.getParameter("userName");
+		String password = req.getParameter("userPassword");
 		HttpSession session = req.getSession();
-		String name = (String) session.getAttribute("name");
-		String password = (String) session.getAttribute("password");
-		session.setAttribute("name", name);
-		session.setAttribute("password", password);
-		if (name!=null) {
-			RequestDispatcher rd = req.getRequestDispatcher("/AuthorizationServlet");
-			rd.forward(request, response);
-		} else 
-		{
-			RequestDispatcher rd = req.getRequestDispatcher("index.jsp");
-			rd.forward(request, response);
+		Object sessName = session.getAttribute("name");
+		Object sessPass = session.getAttribute("password");
+		if (sessName!=null&&sessPass!=null) {
+			req.getRequestDispatcher("AuthorizationServlet").forward(request, response);
+		} else if((name.equals("user")&&password.equals("user"))||(name.equals("admin")&&password.equals("admin"))) {
+			session.setAttribute("name", name);
+			session.setAttribute("password", password);
+		} else {
+			req.getRequestDispatcher("/index.jsp").forward(request, response);
 		}
+		//chain.doFilter(request, response);
 	}
 
 	/**

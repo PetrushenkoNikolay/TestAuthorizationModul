@@ -7,7 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-Hello admin!
-
+<p>Hello admin!</p>
+<form action="/RemoveSessionServlet" method="post">
+  <input type="submit" value="clear session">
+</form>
 </body>
 </html>

@@ -20,9 +20,19 @@
   	<description></description>
   	<servlet-class>authorizationServlet.AuthorizationServlet</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>RemoveSessionServlet</servlet-name>
+  	<display-name>RemoveSessionServlet</display-name>
+  	<description></description>
+  	<servlet-class>removeSessionServlet.RemoveSessionServlet</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>AuthorizationServlet</servlet-name>
   	<url-pattern>/</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>RemoveSessionServlet</servlet-name>
+  	<url-pattern>/RemoveSessionServlet</url-pattern>
   </servlet-mapping>
 </web-app>
  

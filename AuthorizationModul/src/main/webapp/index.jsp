@@ -5,7 +5,7 @@
 <html>
   <body>
     <div>
-      <form action="/AuthorizationServlet" method="POST">
+      <form action="authorizationServlet/AuthorizationServlet" method="POST">
         <br>
         <input type="text" placeholder="Enter your name" name="userName">
         <br/><br/>
